@@ -11,7 +11,7 @@ from django.db.models import Q
 
 
 def index(request):
-	news = News.objects.all()
+	news = News.objects.all().order_by('Published_date')
 	context = {'news' :news}
 	return render(request, 'MorningBriefing/index.html',context)
 
