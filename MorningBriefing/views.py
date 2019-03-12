@@ -11,13 +11,13 @@ from django.db.models import Q
 
 
 def index(request):
-	news = News.objects.all().order_by('Published_date')
+	news = News.objects.all().order_by('-Published_date')
 	context = {'news' :news}
 	return render(request, 'MorningBriefing/index.html',context)
 
 
 def Powerinsight(request):
-	report = Report.objects.all().order_by('published_date')
+	report = Report.objects.all().order_by('-published_date')
 	context = {'report' :report}
 	return render(request, 'MorningBriefing/Powerinsight.html',context)
 
@@ -40,7 +40,7 @@ def a(request):
 		search=""
 	start_date=start_date if start_date else one_day_ago
 	end_date=end_date if end_date else today
-	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('Published_date')
+	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('-Published_date')
 	context = {'news':news,}
 	return render(request, 'MorningBriefing/a.html',context)
 
@@ -61,7 +61,7 @@ def b(request):
 		search=""
 	start_date=start_date if start_date else one_day_ago
 	end_date=end_date if end_date else today
-	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('Published_date')
+	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('-Published_date')
 	context = {'news':news,}
 	return render(request, 'MorningBriefing/b.html',context)
 
@@ -82,7 +82,7 @@ def c(request):
 		search=""
 	start_date=start_date if start_date else one_day_ago
 	end_date=end_date if end_date else today
-	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('Published_date')
+	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('-Published_date')
 	context = {'news':news,}
 	return render(request, 'MorningBriefing/c.html',context)
 
@@ -103,7 +103,7 @@ def d(request):
 		search=""
 	start_date=start_date if start_date else one_day_ago
 	end_date=end_date if end_date else today
-	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('Published_date')
+	news = News.objects.filter(Q(Published_date__gte=start_date, Published_date__lte=end_date)&Q(Title__contains=search)).order_by('-Published_date')
 	context = {'news':news,}
 	return render(request, 'MorningBriefing/d.html',context)
 
