@@ -16,8 +16,24 @@ def index(request):
 	return render(request, 'MorningBriefing/index.html',context)
 
 
-def Powerinsight(request):
-	report = Report.objects.all().order_by('-published_date')
+def Powerinsight(request):today=datetime.date.today()
+	one_day_ago = today-datetime.timedelta(days=1)
+	try:
+		start_date=request.POST["start_date"]
+	except:
+		tart_date="2019-01-01"
+	try:
+		end_date=request.POST["end_date"]
+	except:
+		end_date=today
+	try:
+		search=request.POST["search"]
+	except:
+		search=""
+	start_date=start_date if start_date else one_day_ago
+	end_date=end_date if end_date else today
+	report = Report.objects.filter(Q(published_date__gte=start_date, published_date__lte=end_date)&Q(title__contains=search)).order_by('-published_date')
+
 	context = {'report' :report}
 	return render(request, 'MorningBriefing/Powerinsight.html',context)
 
